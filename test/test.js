@@ -4,6 +4,7 @@ import td from 'testdouble';
 import expect from 'expect';
 import middleware from '../src/';
 import { createWebsocket } from '../src/websocket';
+import { message } from '../src/actions';
 
 // This does not exist in the Node env, but does in the browser
 import WebSocket from 'ws';
@@ -33,6 +34,18 @@ describe('middleware', () => {
     const actual = middleware()(next)(action);
 
     expect(actual).toBe(expected);
+  });
+
+  it('should parse JSON payload', () => {
+    const expected = { data: 'foof' };
+    const event = { data: JSON.stringify(expected) };
+    expect(message(event).payload.data).toEqual(expected);
+  });
+
+  it('should not parse non-JSON payload', () => {
+    const expected = 'nah';
+    const event = { data: expected };
+    expect(message(event).payload.data).toEqual(expected);
   });
 
   context('createWebsocket', () => {

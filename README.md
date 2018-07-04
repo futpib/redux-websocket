@@ -8,12 +8,12 @@ This middleware uses actions, dispatched with Redux to interact with a WebSocket
 
 ## Is it any good?
 
-Yes. Yes it is.
+Dunno.
 
 ## Installation
 
 ```bash
-$ npm install @giantmachines/redux-websocket --save
+$ yarn add @futpib/redux-websocket
 ```
 
 ## Middleware Installation
@@ -22,7 +22,7 @@ Once you have installed the library via npm, you can add it to your Redux middle
 
 ```javascript
 // ... other imports
-import websocket from '@giantmachines/redux-websocket'
+import websocket from '@futpib/redux-websocket'
 
 const app = combineReducers(reducers)
 const store = createStore(
@@ -55,7 +55,7 @@ WEBSOCKET_MESSAGE
 They can be imported from the standard package and used like so
 
 ```javascript
-import { WEBSOCKET_CONNECT } from '@giantmachines/redux-websocket'
+import { WEBSOCKET_CONNECT } from '@futpib/redux-websocket'
 
 store.dispatch({
   type: WEBSOCKET_CONNECT,

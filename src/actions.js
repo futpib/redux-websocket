@@ -30,11 +30,22 @@ export const closed = (event: Event): Action => ({
   }
 });
 
+const tryJSONParse = x => {
+  try {
+    return JSON.parse(x);
+  } catch (err) {
+    if (err instanceof SyntaxError) {
+      return x;
+    }
+    throw err;
+  }
+}
+
 export const message = (event: MessageEvent): Action => ({
   type: WEBSOCKET_MESSAGE,
   payload: {
     timestamp: new Date(),
-    data: event.data,
+    data: tryJSONParse(event.data),
     event
   }
 });
